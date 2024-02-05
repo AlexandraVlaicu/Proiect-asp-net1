@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proiectdaw.Data;
 
@@ -10,9 +11,11 @@ using proiectdaw.Data;
 namespace proiectdaw.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127203635_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,50 +233,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Admin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Adminname")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Admin");
-                });
-
-            modelBuilder.Entity("proiectdaw.Models.Categorie", b =>
+            modelBuilder.Entity("proiect_daw.Models.Categorie", b =>
                 {
                     b.Property<int>("CategorieID")
                         .ValueGeneratedOnAdd()
@@ -288,7 +248,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("Categorii");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Client", b =>
+            modelBuilder.Entity("proiect_daw.Models.Client", b =>
                 {
                     b.Property<int>("ClientID")
                         .ValueGeneratedOnAdd()
@@ -307,7 +267,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("Clienti");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Comanda", b =>
+            modelBuilder.Entity("proiect_daw.Models.Comanda", b =>
                 {
                     b.Property<int>("ComandaID")
                         .ValueGeneratedOnAdd()
@@ -330,7 +290,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("Comenzi");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.DetaliuComanda", b =>
+            modelBuilder.Entity("proiect_daw.Models.DetaliuComanda", b =>
                 {
                     b.Property<int>("DetaliuComandaID")
                         .ValueGeneratedOnAdd()
@@ -357,7 +317,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("DetaliiComanda");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Livrare", b =>
+            modelBuilder.Entity("proiect_daw.Models.Livrare", b =>
                 {
                     b.Property<int>("LivrareID")
                         .ValueGeneratedOnAdd()
@@ -381,7 +341,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("Livrari");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Produs", b =>
+            modelBuilder.Entity("proiect_daw.Models.Produs", b =>
                 {
                     b.Property<int>("ProdusID")
                         .ValueGeneratedOnAdd()
@@ -411,7 +371,7 @@ namespace proiectdaw.Migrations
                     b.ToTable("Produse");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Review", b =>
+            modelBuilder.Entity("proiect_daw.Models.Review", b =>
                 {
                     b.Property<int>("ReviewID")
                         .ValueGeneratedOnAdd()
@@ -442,58 +402,15 @@ namespace proiectdaw.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("ComandaProdus", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Comanda", null)
+                    b.HasOne("proiect_daw.Models.Comanda", null)
                         .WithMany()
                         .HasForeignKey("ComenziComandaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("proiectdaw.Models.Produs", null)
+                    b.HasOne("proiect_daw.Models.Produs", null)
                         .WithMany()
                         .HasForeignKey("ProduseProdusID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -551,9 +468,9 @@ namespace proiectdaw.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Comanda", b =>
+            modelBuilder.Entity("proiect_daw.Models.Comanda", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Client", "Client")
+                    b.HasOne("proiect_daw.Models.Client", "Client")
                         .WithMany("Comenzi")
                         .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -562,15 +479,15 @@ namespace proiectdaw.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.DetaliuComanda", b =>
+            modelBuilder.Entity("proiect_daw.Models.DetaliuComanda", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Comanda", "Comanda")
+                    b.HasOne("proiect_daw.Models.Comanda", "Comanda")
                         .WithMany("DetaliiComanda")
                         .HasForeignKey("ComandaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("proiectdaw.Models.Produs", "Produs")
+                    b.HasOne("proiect_daw.Models.Produs", "Produs")
                         .WithMany("DetaliiComanda")
                         .HasForeignKey("ProdusID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,20 +498,20 @@ namespace proiectdaw.Migrations
                     b.Navigation("Produs");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Livrare", b =>
+            modelBuilder.Entity("proiect_daw.Models.Livrare", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Comanda", "Comanda")
+                    b.HasOne("proiect_daw.Models.Comanda", "Comanda")
                         .WithOne("Livrare")
-                        .HasForeignKey("proiectdaw.Models.Livrare", "ComandaID")
+                        .HasForeignKey("proiect_daw.Models.Livrare", "ComandaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Comanda");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Produs", b =>
+            modelBuilder.Entity("proiect_daw.Models.Produs", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Categorie", "Categorii")
+                    b.HasOne("proiect_daw.Models.Categorie", "Categorii")
                         .WithMany("Produse")
                         .HasForeignKey("CategorieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -603,15 +520,15 @@ namespace proiectdaw.Migrations
                     b.Navigation("Categorii");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Review", b =>
+            modelBuilder.Entity("proiect_daw.Models.Review", b =>
                 {
-                    b.HasOne("proiectdaw.Models.Client", "Client")
+                    b.HasOne("proiect_daw.Models.Client", "Client")
                         .WithMany("Reviews")
                         .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("proiectdaw.Models.Produs", "Produs")
+                    b.HasOne("proiect_daw.Models.Produs", "Produs")
                         .WithMany("Reviews")
                         .HasForeignKey("ProdusID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -622,19 +539,19 @@ namespace proiectdaw.Migrations
                     b.Navigation("Produs");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Categorie", b =>
+            modelBuilder.Entity("proiect_daw.Models.Categorie", b =>
                 {
                     b.Navigation("Produse");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Client", b =>
+            modelBuilder.Entity("proiect_daw.Models.Client", b =>
                 {
                     b.Navigation("Comenzi");
 
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Comanda", b =>
+            modelBuilder.Entity("proiect_daw.Models.Comanda", b =>
                 {
                     b.Navigation("DetaliiComanda");
 
@@ -642,7 +559,7 @@ namespace proiectdaw.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("proiectdaw.Models.Produs", b =>
+            modelBuilder.Entity("proiect_daw.Models.Produs", b =>
                 {
                     b.Navigation("DetaliiComanda");
 
